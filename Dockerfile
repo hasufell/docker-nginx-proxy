@@ -1,13 +1,6 @@
-FROM nginx:1.9.2
-MAINTAINER Jason Wilder jwilder@litl.com
+FROM        hasufell/gentoo-nginx:latest
+MAINTAINER  Julian Ospald <hasufell@gentoo.org>
 
-# Install wget and install/updates certificates
-RUN apt-get update \
- && apt-get install -y -q --no-install-recommends \
-    ca-certificates \
-    wget \
- && apt-get clean \
- && rm -r /var/lib/apt/lists/*
 
 # Configure Nginx and apply fix for very long server names
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
