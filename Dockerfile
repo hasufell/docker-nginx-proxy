@@ -16,11 +16,11 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
  && tar -C /usr/local/bin -xvzf docker-gen-linux-amd64-$DOCKER_GEN_VERSION.tar.gz \
  && rm /docker-gen-linux-amd64-$DOCKER_GEN_VERSION.tar.gz
 
-COPY . /app/
-WORKDIR /app/
-
 ENV DOCKER_HOST unix:///tmp/docker.sock
 
 VOLUME ["/etc/nginx/certs"]
 
-CMD ["forego", "start", "-r"]
+COPY nginx.tmpl Procfile /app/
+WORKDIR /app/
+
+CMD /usr/sbin/nginx -g "daemon on;" && forego start -r
