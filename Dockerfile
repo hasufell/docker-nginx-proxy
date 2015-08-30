@@ -1,11 +1,6 @@
 FROM        hasufell/gentoo-nginx:latest
 MAINTAINER  Julian Ospald <hasufell@gentoo.org>
 
-
-# Configure Nginx and apply fix for very long server names
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
- && sed -i 's/^http {/&\n    server_names_hash_bucket_size 128;/g' /etc/nginx/nginx.conf
-
 # Install Forego
 RUN wget -P /usr/local/bin https://godist.herokuapp.com/projects/ddollar/forego/releases/current/linux-amd64/forego \
  && chmod u+x /usr/local/bin/forego
@@ -18,9 +13,12 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
 
 ENV DOCKER_HOST unix:///tmp/docker.sock
 
+# Configure Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
 VOLUME ["/etc/nginx/certs"]
 
 COPY nginx.tmpl Procfile /app/
 WORKDIR /app/
 
-CMD /usr/sbin/nginx -g "daemon on;" && forego start -r
+CMD ["forego", "start", "-r"]
