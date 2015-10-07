@@ -24,6 +24,7 @@
 		server_name_in_redirect off;
 
 		proxy_pass {{ .Proto }}://{{ .Host }};
+		proxy_read_timeout 300s;
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" .Host)) }}
 		auth_basic	"Restricted {{ .Host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" .Host) }};
@@ -140,7 +141,7 @@ server {
 	{{ end }}
 
 
-	{{ template "location" (dict "Location" "/" "Proto" $proto "Host" $host) }}
+	{{ template "location" (dict "Path" "/" "Proto" $proto "Host" $host) }}
 }
 {{ else }}
 
@@ -168,3 +169,5 @@ server {
 
 {{ end }}
 {{ end }}
+
+# vim: syntax=gotexttmpl ts=4 sw=4 sts=4 sr noet
