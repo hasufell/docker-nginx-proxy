@@ -21,4 +21,4 @@ VOLUME ["/etc/nginx/certs"]
 COPY nginx.tmpl Procfile /app/
 WORKDIR /app/
 
-CMD ["forego", "start", "-r"]
+CMD exec forego start -r
