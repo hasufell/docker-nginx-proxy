@@ -37,6 +37,18 @@ You can also use wildcards at the beginning and the end of host name, like `*.ba
 
 If you would like to connect to your backend using HTTPS instead of HTTP, set `VIRTUAL_PROTO=https` on the backend container.
 
+### Default Path
+
+By default, the proxy configures the nginx location like so:
+```
+location / {
+	...
+}
+```
+
+The `/` can be overwritten ia setting the environment variable `VIRTUAL_PATH=/bar/`
+when starting the backend container.
+
 ### Default Host
 
 To set the default host for nginx use the env var `DEFAULT_HOST=foo.bar.com` for example
