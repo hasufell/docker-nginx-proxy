@@ -185,3 +185,6 @@ If you are using multiple hostnames for a single container (e.g. `VIRTUAL_HOST=e
 
     $ { echo 'server_tokens off;'; echo 'client_max_body_size 100m;'; } > /path/to/vhost.d/www.example.com
     $ ln -s www.example.com /path/to/vhost.d/example.com
+
+In addition, you can set includes for the `location / {... }` block. The file must be named
+/etc/nginx/vhost.d/location-`VIRTUAL_HOST`.

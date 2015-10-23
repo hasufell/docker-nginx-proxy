@@ -29,6 +29,10 @@
 		auth_basic	"Restricted {{ .Host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" .Host) }};
 		{{ end }}
+
+		{{ if (exists (printf "/etc/nginx/vhost.d/location-%s" $host)) }}
+		include {{ printf "/etc/nginx/vhost.d/location-%s" $host }};
+		{{ end }}
 	}
 {{ end }}
 
