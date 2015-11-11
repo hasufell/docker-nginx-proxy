@@ -188,3 +188,8 @@ If you are using multiple hostnames for a single container (e.g. `VIRTUAL_HOST=e
 
 In addition, you can set includes for the `location / {... }` block. The file must be named
 /etc/nginx/vhost.d/location-`VIRTUAL_HOST`.
+
+### Modsecurity support
+
+When starting the backend server, pass `-e VIRTUAL_MODSEC=on` to the
+`docker run` command. Only `on` and `off` are allowed values.
