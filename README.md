@@ -138,7 +138,7 @@ a 503.
 
 #### Perfect Forward Secrecy
 
-PFS is enabled by default. Its main purpose is to let private ssl traffic stay private even in case of a lost key. 
+For PFS to work you need to generate Diffie-Hellman groups for your container. Use: `openssl dhparam -out /path/to/certs/foo.bar.com.pem 4096` to generate it. Its main purpose is to let private ssl traffic stay private even in case of a lost key. 
 See: https://www.howtoforge.com/ssl-perfect-forward-secrecy-in-nginx-webserver#implementing-ssl-perfect-forward-secrecy-in-nginx-webserver
  and http://en.wikipedia.org/wiki/Forward_secrecy#Perfect_forward_secrecy .
 
