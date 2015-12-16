@@ -97,6 +97,8 @@ hosts in use.  The certificate and keys should be named after the virtual host w
 `.key` extension.  For example, a container with `VIRTUAL_HOST=foo.bar.com` should have a
 `foo.bar.com.crt` and `foo.bar.com.key` file in the certs directory.
 
+When you need a different CA cert you can put it into `foo.bar.com.ca`.
+
 #### Diffie-Hellman Groups
 
 If you have Diffie-Hellman groups enabled, the files should be named after the virtual host with a
@@ -108,6 +110,7 @@ should have a `foo.bar.com.dhparam.pem` file in the certs directory.
 Wildcard certificates and keys should be name after the domain name with a `.crt` and `.key` extension.
 For example `VIRTUAL_HOST=foo.bar.com` would use cert name `bar.com.crt` and `bar.com.key`.
 
+When you need a different CA cert you can put it into `foo.bar.com.ca`.
 #### SNI
 
 If your certificate(s) supports multiple domain names, you can start a container with `CERT_NAME=<name>`
