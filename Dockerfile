@@ -14,11 +14,10 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
 ENV DOCKER_HOST unix:///tmp/docker.sock
 
 # Configure Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf perfect-forward-secrecy.conf /etc/nginx/
 
 VOLUME ["/etc/nginx/certs"]
 
-COPY perfect-forward-secrecy.conf /etc/nginx/
 COPY nginx.tmpl Procfile /app/
 WORKDIR /app/
 
