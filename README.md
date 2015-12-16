@@ -136,6 +136,12 @@ to establish a connection.  A self-signed or generic cert named `default.crt` an
 will allow a client browser to make a SSL connection (likely w/ a warning) and subsequently receive
 a 503.
 
+#### Perfect Forward Secrecy
+
+PFS is enabled by default. Its main purpose is to let private ssl traffic stay private even in case of a lost key. 
+See: https://www.howtoforge.com/ssl-perfect-forward-secrecy-in-nginx-webserver#implementing-ssl-perfect-forward-secrecy-in-nginx-webserver
+ and http://en.wikipedia.org/wiki/Forward_secrecy#Perfect_forward_secrecy .
+
 ### Basic Authentication Support
 
 In order to be able to secure your virtual host, you have to create a file named as its equivalent VIRTUAL_HOST variable on directory
