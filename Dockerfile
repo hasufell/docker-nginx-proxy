@@ -18,6 +18,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 VOLUME ["/etc/nginx/certs"]
 
+COPY perfect-forward-secrecy.conf /etc/nginx/
 COPY nginx.tmpl Procfile /app/
 WORKDIR /app/
 
