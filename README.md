@@ -37,6 +37,18 @@ You can also use wildcards at the beginning and the end of host name, like `*.ba
 
 If you would like to connect to your backend using HTTPS instead of HTTP, set `VIRTUAL_PROTO=https` on the backend container.
 
+### Default Path
+
+By default, the proxy configures the nginx location like so:
+```
+location / {
+	...
+}
+```
+
+The `/` can be overwritten ia setting the environment variable `VIRTUAL_PATH=/bar/`
+when starting the backend container.
+
 ### Default Host
 
 To set the default host for nginx use the env var `DEFAULT_HOST=foo.bar.com` for example
@@ -85,6 +97,8 @@ hosts in use.  The certificate and keys should be named after the virtual host w
 `.key` extension.  For example, a container with `VIRTUAL_HOST=foo.bar.com` should have a
 `foo.bar.com.crt` and `foo.bar.com.key` file in the certs directory.
 
+When you need a different CA cert you can put it into `foo.bar.com.ca`.
+
 #### Diffie-Hellman Groups
 
 If you have Diffie-Hellman groups enabled, the files should be named after the virtual host with a
@@ -96,6 +110,7 @@ should have a `foo.bar.com.dhparam.pem` file in the certs directory.
 Wildcard certificates and keys should be name after the domain name with a `.crt` and `.key` extension.
 For example `VIRTUAL_HOST=foo.bar.com` would use cert name `bar.com.crt` and `bar.com.key`.
 
+When you need a different CA cert you can put it into `foo.bar.com.ca`.
 #### SNI
 
 If your certificate(s) supports multiple domain names, you can start a container with `CERT_NAME=<name>`
@@ -173,3 +188,11 @@ If you are using multiple hostnames for a single container (e.g. `VIRTUAL_HOST=e
 
     $ { echo 'server_tokens off;'; echo 'client_max_body_size 100m;'; } > /path/to/vhost.d/www.example.com
     $ ln -s www.example.com /path/to/vhost.d/example.com
+
+In addition, you can set includes for the `location / {... }` block. The file must be named
+/etc/nginx/vhost.d/location-`VIRTUAL_HOST`.
+
+### Modsecurity support
+
+When starting the backend server, pass `-e VIRTUAL_MODSEC=on` to the
+`docker run` command. Only `on` and `off` are allowed values.
