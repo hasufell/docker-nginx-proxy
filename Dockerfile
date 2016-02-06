@@ -1,4 +1,4 @@
-FROM        hasufell/gentoo-nginx:latest
+FROM        mosaiksoftware/gentoo-nginx:latest
 MAINTAINER  Julian Ospald <hasufell@gentoo.org>
 
 # Install Forego
