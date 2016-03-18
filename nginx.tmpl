@@ -87,6 +87,7 @@ server {
 upstream {{ $host }} {
 {{ range $container := $containers }}
 	{{ $addrLen := len $container.Addresses }}
+
 	{{ range $knownNetwork := $CurrentContainer.Networks }}
 		{{ range $containerNetwork := $container.Networks }}
 			{{ if eq $knownNetwork.Name $containerNetwork.Name }}
@@ -104,6 +105,7 @@ upstream {{ $host }} {
 				{{ end }}
 			{{ end }}
 		{{ end }}
+	{{ end }}
 {{ end }}
 }
 
